@@ -1,0 +1,21 @@
+<div class="container mx-auto p-6">
+  <div class="bg-white rounded-lg shadow p-6">
+    <h2 class="text-2xl mb-4">Welcome, <%= @user.email %></h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-gray-50 p-4 rounded">
+        <h3 class="text-xl mb-2">Profile Info</h3>
+        <p>Email: <%= @user.email %></p>
+        <p>Member since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
+      </div>
+      
+      <div class="bg-gray-50 p-4 rounded">
+        <h3 class="text-xl mb-2">Quick Actions</h3>
+        <ul class="space-y-2">
+          <li><%= link_to "Edit Profile", "#", class: "text-blue-600 hover:underline" %></li>
+          <li><%= link_to "Settings", "#", class: "text-blue-600 hover:underline" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
