@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   resources :users, only: [:new, :create]
+
+  get "/_/:filename", to: "assets#serve_js", constraints: { filename: /.*\.js/ }
 end

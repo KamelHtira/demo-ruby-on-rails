@@ -1,34 +1,61 @@
-<div class="signup-form">
-  <h2>Sign Up</h2>
-  
-  <%= form_with(model: @user, local: true) do |f| %>
-    <% if @user.errors.any? %>
-      <div class="alert alert-danger">
-        <% @user.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
-        <% end %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-one-third">
+        <div class="box">
+          <h2 class="title is-4 has-text-centered">Sign Up</h2>
+          
+          <%= form_with(model: @user, local: true) do |f| %>
+            <% if @user.errors.any? %>
+              <div class="notification is-danger">
+                <% @user.errors.full_messages.each do |msg| %>
+                  <p><%= msg %></p>
+                <% end %>
+              </div>
+            <% end %>
+            
+            <div class="field">
+              <%= f.label :email, class: "label" %>
+              <div class="control has-icons-left">
+                <%= f.email_field :email, class: "input", placeholder: "e.g. alex@example.com" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            
+            <div class="field">
+              <%= f.label :password, class: "label" %>
+              <div class="control has-icons-left">
+                <%= f.password_field :password, class: "input", placeholder: "Enter your password" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            
+            <div class="field">
+              <%= f.label :password_confirmation, "Confirm Password", class: "label" %>
+              <div class="control has-icons-left">
+                <%= f.password_field :password_confirmation, class: "input", placeholder: "Confirm your password" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            
+            <div class="field">
+              <div class="control">
+                <%= f.submit "Sign Up", class: "button is-primary is-fullwidth" %>
+              </div>
+            </div>
+          <% end %>
+          
+          <div class="has-text-centered mt-4">
+            <p>Already have an account? <%= link_to "Log in", login_path, class: "has-text-primary" %></p>
+          </div>
+        </div>
       </div>
-    <% end %>
-    
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.email_field :email %>
     </div>
-    
-    <div class="field">
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-    </div>
-    
-    <div class="field">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </div>
-    
-    <div class="actions">
-      <%= f.submit "Sign Up" %>
-    </div>
-  <% end %>
-  
-  <p>Already have an account? <%= link_to "Log in", login_path %></p>
-</div>
+  </div>
+</section>
