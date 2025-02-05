@@ -1,21 +1,69 @@
-<div class="container mx-auto p-6">
-  <div class="bg-white rounded-lg shadow p-6">
-    <h2 class="text-2xl mb-4">Welcome, <%= @user.email %></h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-gray-50 p-4 rounded">
-        <h3 class="text-xl mb-2">Profile Info</h3>
-        <p>Email: <%= @user.email %></p>
-        <p>Member since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
+<div class="container">
+  <div class="box">
+    <h2 class="title is-4">Welcome, <%= @user.email %></h2>
+
+    <div class="columns is-multiline">
+      <!-- Profile Info -->
+      <div class="column is-half">
+        <div class="box">
+          <h3 class="title is-5">Profile Info</h3>
+          <p><strong>Email:</strong> <%= @user.email %></p>
+          <p><strong>Member since:</strong> <%= @user.created_at.strftime("%B %d, %Y") %></p>
+        </div>
       </div>
-      
-      <div class="bg-gray-50 p-4 rounded">
-        <h3 class="text-xl mb-2">Quick Actions</h3>
-        <ul class="space-y-2">
-          <li><%= link_to "Edit Profile", "#", class: "text-blue-600 hover:underline" %></li>
-          <li><%= link_to "Settings", "#", class: "text-blue-600 hover:underline" %></li>
-        </ul>
+      <!-- Quick Actions -->
+      <div class="column is-half">
+        <div class="box">
+          <h3 class="title is-5">Quick Actions</h3>
+          <ul>
+            <li><%= link_to "Edit Profile", "#", class: "has-text-link" %></li>
+            <li><%= link_to "Settings", "#", class: "has-text-link" %></li>
+          </ul>
+        </div>
       </div>
+      <div class="container">
+        <h3 class="title is-5">My Chart</h3>
+<canvas id="myChart" width="600" height="200"></canvas>
+
+<script>
+const initChart = () => {
+  const ctx = document.getElementById('myChart');
+  if (!ctx) return; // Guard clause in case element isn't found
+  
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(255, 206, 86, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
+          'rgba(153, 102, 255, 0.5)',
+          'rgba(255, 159, 64, 0.5)'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+};
+
+// Listen for both initial page load and Turbo navigation
+document.addEventListener('turbo:load', initChart);
+document.addEventListener('DOMContentLoaded', initChart);
+</script>
     </div>
   </div>
 </div>
